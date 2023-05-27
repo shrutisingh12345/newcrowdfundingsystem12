@@ -1,0 +1,43 @@
+﻿@model Crowd_Funding.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<link href="~/css/Google-Style-Login.css" rel="stylesheet" />
+<div class="login-card">
+    <img class="img-thumbnail profile-img-card" src="~/img/avatar_2x.png" />
+    <p class="profile-name-card"></p>
+    <form class="form-signin" asp-action="Login" method="post">
+        <span class="reauth-email"></span>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PWD" class="control-label"></label>
+            <input asp-for="PWD" class="form-control" type="password" />
+            <span asp-validation-for="PWD" class="text-danger"></span>
+        </div>
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div role="alert" class="alert alert-danger"><span><strong>@ViewBag.Error</strong></span></div>
+
+            }
+        }
+
+        <button class="btn btn-primary btn-block btn-lg btn-signin"
+                type="submit">
+            Sign in
+        </button>
+    </form><a class="forgot-password" href="@Url.Action("SignUp","User")">New User ? </a>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

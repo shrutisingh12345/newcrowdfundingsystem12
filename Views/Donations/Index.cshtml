@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Crowd_Funding.Models.Donation>
+
+@{
+    ViewData["Title"] = "Index";
+    int n = 1;
+}
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-danger flex-fill">Recieved Donation</h4>
+</div>
+<hr />
+<div class="container">
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-header d-xl-flex align-items-xl-center">
+                        <h5 class="flex-fill">Donations Details</h5>
+                    </div>
+                    <div class="table-responsive" style="font-size: 14px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 52px;">Sn.</th>
+                                    <th>Name</th>
+                                    <th style="width: 113px;">Mobile</th>
+                                    <th style="width: 244px;">Email</th>
+                                    <th style="width: 91px;">Amount</th>
+                                    <th>DateTime</th>
+                                    <th class="text-center" style="width: 114px;">#Campaign</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.Raw(n++)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DonorName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mobile)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Amount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DonationDate)
+                                    </td>
+                                    <td class="text-center" >
+                                        @Html.DisplayFor(modelItem => item.CID)
+                                    </td>
+
+                                </tr>
+                                }
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

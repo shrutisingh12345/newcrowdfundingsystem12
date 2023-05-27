@@ -1,0 +1,49 @@
+﻿@model Crowd_Funding.Models.Campaign
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-danger flex-fill">+ New Campaign</h4>
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+</div>
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Campaign Details</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="CID" />
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group"><label>Image : </label><input name="Image" type="file" accept="image/*" /></div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

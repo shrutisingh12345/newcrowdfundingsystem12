@@ -1,0 +1,133 @@
+﻿@model Crowd_Funding.Models.Donation
+@using Microsoft.AspNetCore.Http;
+@using System.IO;
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-danger flex-fill">Make Donation</h4>
+</div>
+
+<hr />
+<div class="container">
+
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" id="item-1-1-tab" data-toggle="tab" role="tab" aria-controls="item-1-1" aria-selected="true" href="#item-1-1">Bank Transection</a></li>
+                <li class="nav-item"><a class="nav-link" id="item-1-2-tab" data-toggle="tab" role="tab" aria-controls="item-1-2" aria-selected="false" href="#item-1-2">UPI</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div id="nav-tabContent" class="tab-content">
+                <div id="item-1-1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="item-1-1-tab">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" name="id" value="@ViewBag.CID" />
+                        <input type="hidden" name="CID" value="@ViewBag.CID" />
+
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <div class="card-header d-xl-flex align-items-xl-center">
+                                        <h5 class="flex-fill">Doner Details</h5><img class="img-fluid panel-title-image" src="accepted_cards.png" />
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label asp-for="DonorName" class="control-label"></label>
+                                                    <input asp-for="DonorName" class="form-control" />
+                                                    <span asp-validation-for="DonorName" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Mobile" class="control-label"></label>
+                                                    <input asp-for="Mobile" class="form-control" />
+                                                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Email" class="control-label"></label>
+                                                    <input asp-for="Email" class="form-control" />
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="cardNumber">Card number </label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="tel" id="cardNumber" required placeholder="Valid Card Number" />
+                                                                <div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-7">
+                                                        <div class="form-group"><label for="cardExpiry"><span>expiration </span><span>EXP </span> date</label><input class="form-control" type="tel" id="cardExpiry" required placeholder="MM / YY" /></div>
+                                                    </div>
+                                                    <div class="col-5 pull-right">
+                                                        <div class="form-group"><label for="cardCVC">cv code</label><input class="form-control" type="tel" id="cardCVC" required placeholder="CVC" /></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Amount" class="control-label"></label>
+                                                    <input asp-for="Amount" class="form-control" />
+                                                    <span asp-validation-for="Amount" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group text-right"><button class="btn btn-success" type="submit">Start Subscription</button></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div id="item-1-2" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-2-tab">
+
+                    @if (File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\QRCode\\" + ViewBag.UID + ".jpg"))
+                    {
+                        <img src='~/QRCode/@ViewBag.UID@Html.Raw(".jpg")' style="max-width:900px">
+                    }
+                    else
+                    {
+                        <img src="~/img/image_remove.png" style="opacity: 0.33; max-width: 600px;">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

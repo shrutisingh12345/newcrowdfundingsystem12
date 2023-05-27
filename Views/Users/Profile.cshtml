@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model Crowd_Funding.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+    
+}
+
+<div class="container" style="padding-top: 29px;">
+    <div class="row">
+        <div class="col d-flex">
+            <h5 class="flex-fill" style="margin-bottom: 0px;">
+                <img src="~/img/User_Online.png" style="width: 44px;margin-right: 31px;" />User Name
+            </h5>
+            @if (Context.Session.GetString("UserType") != null && Context.Session.GetString("UserType").Equals("User"))
+            {
+        <div class="btn-group" role="group">
+            <a class="btn btn-info" href="@Url.Action("Edit","Users",new { id = Model.UID })">Update Profile Details</a>
+            <a class="btn btn-success" href="@Url.Action("Document","Users",new { id=Model.UID })">Update Document</a>
+            <a class="btn btn-secondary" href="@Url.Action("QRCode","Users",new { id=Model.UID })">Update QR Code</a>
+
+        </div>
+                                
+            }
+
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container" style="padding-top: 20px;">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Details</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                        <th>@Html.DisplayFor(model => model.UserName)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Mobile)</td>
+                        <td>@Html.DisplayFor(model => model.Mobile)</td>
+                    </tr>
+                    @*<tr>
+                        <td>@Html.DisplayNameFor(model => model.Address)</td>
+                        <td>@Html.DisplayFor(model => model.Address)</td>
+                    </tr>*@
+                   
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.Status)</td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

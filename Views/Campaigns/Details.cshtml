@@ -1,0 +1,29 @@
+﻿@model Crowd_Funding.Models.Campaign
+
+@{
+    ViewData["Title"] = "Details";
+    var Campaign = ViewBag.Campaign;
+}
+
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-danger flex-fill">Campaign Description</h4>
+</div>
+<hr />
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="media">
+                <img class="shadow mr-3" src="~/img/Campaigns/@Campaign.UID@Html.Raw(".jpg")" style="border-radius: 30px;max-width: 440px;" />
+                <div class="media-body">
+                    <h5>@Campaign.Title</h5>
+                    <h6 class="text-muted mb-2">@Campaign.CampaignDateTime</h6>
+                    <p style="min-height: 130px;">@Campaign.Description </p>
+                    <p style="font-size: 12px;"><img src="~/img/male_user32.png" /><strong>@Campaign.User.UserName - @Campaign.User.Mobile</strong></p>
+                    <div class="col text-right"><a class="btn btn-primary" href="@Url.Action("Create","Donations",new { id=Campaign.CID })">Donate Now</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

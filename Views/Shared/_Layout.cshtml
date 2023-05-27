@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Http;
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Crowd_Funding</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/css/Features-Boxed.css" rel="stylesheet" />
+    <link href="~/css/Google-Style-Login.css" rel="stylesheet" />
+    <link href="~/css/Hero-Technology.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&amp;display=swap">
+    <link rel="stylesheet" href="~/fonts/font-awesome.min.css">
+    <link href="~/fonts/fontawesome5-overrides.min.css" rel="stylesheet" />
+    <link href="~/css/3-Cards-per-Row.css" rel="stylesheet" />
+    <link href="~/css/Article-List.css" rel="stylesheet" />
+    <link href="~/css/Bootstrap-Payment-Form.css" rel="stylesheet" />
+    <link href="~/css/Features-Boxed.css" rel="stylesheet" />
+    <link href="~/css/Registration-Form-with-Photo.css" rel="stylesheet" />
+
+</head>
+<body style="font-family: Antic, sans-serif; background-color: rgb(255,245,247) ">
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-md bg-danger shadow">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Crowd_Funding</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="nav navbar-nav">
+
+
+
+
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Search","Campaigns")">Search</a></li>
+
+
+                        @if (Context.Session.GetString("UserType") != null && Context.Session.GetString("UserType").Equals("Admin"))
+                        {
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("AdminAllCampaigns","Campaigns")">All Campaigns</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("UserList","Users")">All User</a></li>
+                        }
+                        @if (Context.Session.GetString("UserType") != null && Context.Session.GetString("UserType").Equals("User"))
+                        {
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Campaigns")">My Campaigns</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Profile","Users",new { id = Context.Session.GetString("UID")  })">Profile</a></li>
+
+                        }
+
+                        @if (Context.Session.GetString("UID") != null)
+                        {
+                            <li class="nav-item"><a class="nav-link" href="/User/Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Login","User")">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("SignUp","User")">SignUp</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Crowd_Funding - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

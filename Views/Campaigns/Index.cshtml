@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Crowd_Funding.Models.Campaign>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Index";
+    int n = 0;
+}
+
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-danger flex-fill">My Campaigns</h4>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            @if (Context.Session.GetString("UserType") != null && Context.Session.GetString("Status").Equals("Approved"))
+            {
+                <a asp-action="Create" class="btn btn-primary btn-sm" type="button">New Campaign</a>
+            }
+            else
+            {
+                <button class="btn btn-primary btn-sm" type="button" disabled>New Campaign</button>
+            }
+
+
+        </div>
+        <div class="table-responsive" style="font-size: 14px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Sn.</th>
+                        <th>Campaign Name</th>
+
+                        <th style="width: 200px;">Created on</th>
+                        <th class="text-center" style="width: 102px;">Status</th>
+                        <th class="text-center" style="width: 300px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        n++;
+
+                        <tr>
+                            <td>@n</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CampaignDateTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @if (item.Status != "Enabled")
+                                {
+                                    <a class="btn btn-info btn-sm" asp-action="ChangeStatus" asp-route-id="@item.CID">Enable</a> }
+                                else
+                                {
+                                    <a class="btn btn-warning btn-sm" asp-action="ChangeStatus" asp-route-id="@item.CID">Disable</a>
+                                }
+
+                                <a class="btn btn-primary btn-sm" href="@Url.Action("Index","Donations",new { CID= item.CID })">Donations</a>
+                                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.CID">Edit</a>
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

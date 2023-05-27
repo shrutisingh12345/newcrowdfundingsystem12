@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Crowd_Funding.Models.Campaign>
+
+@{
+    ViewData["Title"] = "AdminAllCampaigns";
+    int n = 1;
+}
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-danger flex-fill">My Campaigns</h4>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header"><a asp-action="Create" class="btn btn-primary btn-sm" type="button">New Campaign</a></div>
+        <div class="table-responsive" style="font-size: 14px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Sn.</th>
+                        <th>Campaign Name</th>
+
+                        <th style="width: 200px;">Created on</th>
+                        <th class="text-center" style="width: 102px;">Status</th>
+                        <th class="text-center" style="width: 102px;">Admin Action</th>
+
+                        <th class="text-center" style="width: 75px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        n++;
+
+                        <tr>
+                            <td>@n</td>
+                            <td><a href="@Url.Action("Details", "Campaigns", new { CID = item.CID })">
+    @Html.DisplayFor(modelItem => item.Title)
+</a>
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CampaignDateTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AdminAction)
+                            </td>
+                            <td>
+                                @if (item.AdminAction != "Enabled")
+                                {
+                                    <a class="btn btn-info btn-sm" href="@Url.Action("ChangeAdminStatus", "Campaigns", new { id = item.CID, })">Approve</a> }
+                                else
+                                {
+                                    <a class="btn btn-warning btn-sm" href="@Url.Action("ChangeAdminStatus", "Campaigns", new { id = item.CID, })">Reject</a>
+                                }
+
+                                
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.IO;
+
+
+@{
+
+}
+
+
+
+
+<div class="container mb-4" style="padding-top: 29px;">
+
+    <div class="row">
+        <div class="col">
+            <h5 style="margin-bottom: 0px;"><img src="~/img/Open%20folder%20accept.png" style="width: 44px;margin-right: 31px;">Document</h5>
+        </div>
+    </div>
+</div>
+<hr>
+@if (Context.Session.GetString("UserType").Equals("User"))
+{
+    <div class="container mb-4" style="padding-top: 29px;">
+        <form asp-action="Document" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col">
+                    <input name="Image" type="file" accept="image/*" />
+                    <input value="@ViewBag.ID" name="id" type="hidden" />
+                </div>
+                <div class="col" style="text-align: right;">
+                    <button class="btn btn-primary" type="submit" style="margin-left: 12px;">Upload</button>
+                    <button class="btn btn-danger" onclick="Delete()" type="button" style="margin-left: 12px;">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+}
+
+
+
+
+<div class="container text-center">
+    @if (File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Documents\\" + ViewBag.ID + ".jpg"))
+    {
+        <img src='~/Documents/@ViewBag.ID@Html.Raw(".jpg")' style="max-width:900px">
+    }
+    else
+    {
+        <img src="~/img/folder_info.png" style="opacity: 0.33; max-width: 600px;">
+    }
+
+
+</div>
+<script>
+    function Delete() {
+        if (!confirm("Confirm Delete ?")) return;
+        var path = '@Url.Action("DeleteFile")' + '?ID=@ViewBag.ID';
+        window.location.assign(path);
+    }
+</script>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Crowd_Funding.Models.Campaign>
+
+@{
+    ViewData["Title"] = "Search";
+
+}
+
+<div class="container" style="margin-top: 20px;">
+    <form action="Search">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Enter Keyword" name="Keyword" value="@ViewBag.Keyword" />
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+   
+</div>
+<hr />
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-0 order-md-1 order-lg-1" style="margin-top: 20px;">
+                    <div class="border rounded shadow bg-white">
+                        <div class="text-center w-100"><img class="card-img-width" src="~/img/Campaigns/@item.UID@Html.Raw(".jpg")" style="margin-top: 10px; max-width: 213px; max-height: 150px; " /></div>
+                        <div style="margin-top: 12px;padding: 12px;">
+                            <h5 class="text-center" style="font-family: Antic, sans-serif;color: #38ae53;">@Html.DisplayFor(modelItem => item.Title)</h5>
+                            <p style="font-family: Antic, sans-serif;font-size: 12px;margin-top: 10px;">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </p>
+                            <p style="font-size: 12px;"><img src="~/img/male_user32.png" /><strong>@item.User.UserName - @item.User.Mobile</strong></p>
+                            <div class="col text-right"><a class="btn btn-danger btn-sm" href="@Url.Action("Details","Campaigns",new { CID=item.CID })">View Details</a></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
+            }
+
+
+
+
+        </div>
+        
+        
+    </div>
+</section>
+
+
+
+
+
+

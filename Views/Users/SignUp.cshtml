@@ -1,0 +1,84 @@
+﻿@model Crowd_Funding.Models.User
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<div class="container d-xl-flex align-items-xl-end" style="margin-top: 20px;">
+    <h4 class="text-center text-danger"><strong>Create</strong> an account.</h4>
+</div>
+
+<hr />
+
+
+<div class="register-photo" style="background: rgba(241,247,252,0);">
+    <div class="form-container shadow">
+        <div class="image-holder"></div>
+        <form method="post" style="padding-right: 40px;padding-left: 59px;">
+            @*<div class="form-group"><input class="form-control" type="email" name="email" /></div>
+            <div class="form-group"><input class="form-control" type="email" name="email" /></div>
+            <div class="form-group"><input class="form-control" type="email" name="email" /></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" /></div>
+            <div class="form-group"><input class="form-control" type="password" name="password-repeat" /></div>*@
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" placeholder="User Name" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mobile" class="control-label"></label>
+                <input asp-for="Mobile" class="form-control" placeholder="Mobile" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PWD" class="control-label"></label>
+                <input asp-for="PWD" class="form-control" type="password" placeholder="Password" />
+                <span asp-validation-for="PWD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="REPWD" class="control-label"></label>
+                <input asp-for="REPWD" class="form-control" type="password" placeholder="Password (repeat)" />
+                <span asp-validation-for="PWD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <div role="alert" class="alert alert-danger"><span><strong>@ViewBag.Error</strong></span></div>
+                }
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block btn-sm" type="submit" style="margin-top: 20px;">Sign Up</button>
+            </div>
+
+           
+
+            <a class="already" href="/Users/Login">You already have an account? Login here.</a>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
